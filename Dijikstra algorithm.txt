@@ -1,0 +1,662 @@
+#include<iostream>
+#include<vector>
+#include<list>
+#include<map>
+#include<ctime>
+#include<cstdlid>
+
+using namespace std;
+
+//general definitions
+
+const int INFINIT =999999;
+
+//INFINIT is used to represent no edge or path between two nodes
+
+ostream  &operator<<(ostream &output,list<char>L)
+
+//overload operator << to print list<char> variables
+
+{ list<char>::iterator i;
+for(int i=L.begin(); i=!=L.end();++i)
+ouput<<*i<<"";
+return output;
+}
+
+//convert node numbers into chars 
+
+inline char vertint to chAr (int n)
+{
+  if (n<26)
+  return static_cadt<char>('A'+n);
+  else
+  return static_cast<char>('a'n-26);
+}
+
+typedef struct str Node Node;
+struct str Npode
+{
+int number;
+int weight;
+list<Node>edges;
+};
+
+//Graph class 
+//represent a graph through an adjacency list
+
+class Graph 
+{
+public:
+Graph();
+Graph (int num vertics ,int intial value);
+char get_node_value(int x);
+void set_node_value(char x,char name);
+int get_edge_value(char x,char y);
+void set_edge_value(char x,cha y,int value);
+bool adjacent(char x,char y);
+list<char>neighbors(char x);
+int V ();
+intE();
+list<char>vertices();
+voidshow();
+
+private:
+int num V;     //numbers of nodes of graph
+int num E;     //numbers of edges of the graph
+vector<char>nodeNames;
+map<char,int>nodeNumbers
+list<Node>adjList;   //adjacency list representing the graph
+};
+
+Graph::Graph()   //create a empty graph
+{
+num v=0;
+num E=0;
+adjList.clear();
+}
+
+
+Graph::Graph(int numvertices,int intial value=INFINIT)
+{
+num V=numvertices;
+numE=0;
+nodeNames.resize(numvertices);
+for(int x=0;x<numv;++x)
+{
+nodeNames[x]=vderinttochar(x);
+nodeNumbers[vertintchar(x)]=x;
+}
+
+adjList.clear();  //create adjacency list with all nodes and empty edges list
+
+for(int i=0;i<numvertices;++i)
+{
+
+Node newNodes;
+newNode.number=i;
+newNode.weight=0;
+adjList.push_back(newNode);
+}
+}
+
+char Graph::get_node_value(int x)
+{
+return nodeNames[x];
+}
+{
+
+int posX=nodrNumbers[x];  //get the number of node X
+
+nodeName[posX]=name;      //link the node number to the name
+
+nodeNumber[name]=posX;    //link the name to node number
+
+}
+
+int Graph::get_edge_value(char x,char y) //return the edge weight between x and y    //return INFINIT if egde does not exists
+
+{ for(list<Node>::itertor i =adj_adjList.begin();i!=adjList.end();++i)
+
+{
+
+if((*i).number==nodeNumber[x])
+for(list<Node>::iterator j=(*i).edges.begin();j!=()*i).edges.end();++j)
+{
+if((*j).number==nodeNumber[y])
+return(*j).weiht;
+}
+}
+return INFINIT; 
+}
+
+void Graph::set_edge_valye(char x,char y,int value)
+{
+bool found ;// ad y in the list of x neighbors if does not exists
+
+for(list<Node>::iterator i= adjList.begin(); iadjList.end();++i)
+{
+ if((*i).number==nodeNumber[x])
+{
+found=false;
+
+for(list<Node>::iterator j =(*i).edge.begin(); j!=(*i).edges.end();++j)
+{ 
+if((*j).number==nodeNumber[y]
+{ 
+(*j).weight=value;
+found=true;
+}
+
+}
+
+
+if(!found)
+
+{
+
+Node newNode y;
+newNode y.number=nodeNumber[y];
+newNode y.weight=value;
+newNode y.egdes.clear();
+(*i).edges.push_back(newNode y);
+}
+}
+}
+}
+for(list<Node>::iterator i=adjList.begin();i!=adiList.end.++i)
+{
+
+found=false;
+
+ for(list<Node>::iterator j =(*i).edge.begin(); j!=(*i).edges.end();++j)
+{ 
+if((*j).number==nodeNumber[x]
+{ 
+(*j).weight=value;
+found=true;
+}    
+}
+
+if(!found)
+
+{
+
+Node newNode X;
+newNode X.number=nodeNumber[y];
+newNode X.weight=value;
+newNode X.egdes.clear();
+(*i).edges.push_back(newNode X);
+}
+}
+}
+ }
+
+bool Graph::adjancent(char x,char y)       //return true if x and y are neighbors and false otherwise
+
+{
+  for(list<Node>::iterator i=adjList.begin();i!=adiList.end.++i )
+
+   {if((*i).number==nodeNumber[x]
+{    
+
+ for(list<Node>::iterator j =(*i).edge.begin(); j!=(*i).edges.end();++j)
+
+{
+ if((*j).number==nodeNumber[y]
+
+{
+return true;
+}
+}
+}
+}
+return false;
+}
+list<char>Graph::neighbors(char x)
+{
+list<char>adjNodes;
+for(list<Node>::iterator i=adjList.begin();i!=adiList.end.++i )
+  {
+if((*i).number==nodeNumber[x])
+{
+for(list<Node>::iterator j =(*i).edge.begin(); j!=(*i).edges.end();++j)
+{
+ajiNodes.push_back(nodesNames[(*j).number]);
+}
+}
+}
+return adjNotes;
+}
+
+int Graph::E()     //eturn the number of nodes in  the graph
+
+{
+return numE;
+}
+
+list<char>Graph::vertices()
+{
+list<char>nodes;
+for(list<Node>::iterator i=adjList.begin();i!=adiList.end.++i )
+  {
+nodes.push_back(nodesNames[(*i).number]);
+}
+return nodes;
+}
+
+//print out adjacency list representing the graph
+
+void Graph::show()
+{
+cout<<"";
+for(list<Node>::iterator i=adjList.begin();i!=adiList.end.++i )
+  {
+cout<<""<<nodesNames[(*i).number];
+
+int shift=0;
+
+for(list<Node>::iterator j =(*i).edge.begin(); j!=(*i).edges.end();++j)
+{
+int walk=(*j).number-shift;
+for(int k=0; k<walk;++k)
+{
+cout<<""<<(*j).weight;
+shift++;
+}
+while (shift<numV)
+
+{
+cout<<"";
+shift++;
+}
+cout<,endl;
+}
+}
+
+
+//nodeinfo definitions
+
+struct strNodesInfo
+{
+char nodeName;  //node names
+int minDist;    // shortest path found to node names
+charthought;    //node that precedenodenames in te shoretest path
+};
+
+typedef struct strNodeInfo NodeInfo;
+
+bool compareNodeName(NodeInfo& n1,NodeInfo& n2)    //compare node info by node name
+
+{
+if(n1.nodeName <n2.nodeName) return true;
+return false;
+}
+bool compareMinDist(NodeInfo& n1,NodeInfo& n2)    //compare node info by mindist
+
+{
+if(n1.minDist <n2.minDist) return true;
+return false;
+}
+bool operatoe=(NodeInfo& n1,NodeInfo& n2)    //compare node info by node name
+
+{
+if(n1.nodeName == n2.nodeName) return true;
+return false;
+}
+//================================================
+//priority queue class
+// stores known information abut node names ,min distances and paths
+//ordered by min distances
+//================================================
+
+class PriorityQueue
+{
+public;
+PriorityQueue();
+void chgpriority(NodeInfo n);
+void miniPriority();
+bool contains(NodeInfo n);
+bool is better (NodeInfo n);
+void insert(NodeInfo n);
+NodeInfo top();
+int size;
+
+
+private:
+
+list<NodeInfo>pq;       //list of known nodes or path ordered by mindist
+};
+
+PriorityQueue::PriorityQueue()
+{
+pq.clear();
+}
+void PriorityQueue::chgPriroity(NodeInfo n)
+{
+for(list<NodeInfo>::iterator      i=pq.begin();
+i!=pq.end();++i)
+if((*i)==n)
+
+{
+(*i).minDist=n.minDist;
+(*i).through=n.through;
+}
+pq.sort(compareMinDist);
+}
+void PriorityQueue::minPriority()
+{
+if(!pq.empty())
+{
+pq.pop_front();
+}
+}
+
+//return true  if there is a node named 'n' in priority queue    and the false otherwise 
+
+bool PriorityQueue::contains(Nodeinfo n)
+{
+
+for(list<NodeInfo>::iterator i=pq.begin(); i!=pq.end();++i)
+
+if((*i).nodeName==n.nodeName)
+return true;
+return false;
+}
+
+for(list<NodeInfo>::iterator i=pq.begin(); i!=pq.end();++i)
+
+if((*i).nodeName==n.nodeName)
+if((*i).minDist>n.minDist)
+return true;
+return false;
+}
+
+//insert node n into priority queue
+void PriorityQueue::insert(NodeInfo n)
+{
+pq.push_back(n);
+pq.sort(compareMinDist);
+}
+
+
+NodeInfo PriorityQueue::top()
+{
+NodeInfo n={'',0};
+if(!pq.empty())
+{
+list<NodeInfo>::iteator i=pq.begin();
+n.nodeName=(*i).nodeName;
+n.minDist=(*i).minDist;
+n.through=(*i).through;
+}
+return n;
+}
+
+int PriorityQueue::size()
+{
+return pq.size();      //rreturn the number of elements in the priority queue
+}
+//shoretest path class
+//implements Dijkstra'a algorith to find shortest  path between two nodes
+//==========================================================================
+
+class shortestPath
+{
+public:
+ShortestPath();
+ShortestPath(Graph g);
+list<char>path(char u,char w);
+int path_size(char u,char w) ;
+
+private:
+Graph graph;   //Graph used by Dijikstra algorithms
+};
+
+ShortestPath::ShortestPath()   //constructor of shortest path class(do nothing)
+{
+}
+ShortestPath::ShortestPath(Graph)   //constructor of shortest path class thet stores Graph used by Dijikstra algorithms
+{
+graph=g;
+}
+
+list<char>ShortestPath::path(char u,char w)
+{
+
+//initialize candidates list with all nodes
+list<char> caandidates =graph.vertices(),desiredPath;
+list<NodeInfo>misPaths;
+PriorityQueue p;
+NodeInfo last selected,n;
+
+
+// calculate the shorstest path 'u'to 'w'
+
+candidates.remove(u);   // remove u from candidates list
+lastselected.nodeName=u;   //set u as last selected
+lastselected.minDist=0;
+lastselected.through=u;
+minpaths.push_back(last selected);   //add u to minpath list
+while ((!candidate.empty ()) &&(last selected.nodeName!=w))
+{
+for(list<char>::iterator i=candidates.begin(); i!=candidates.end();++i)
+
+{
+n.nodeMames=*i;
+n.minDist=lastselected.minDist+grfaph.get_edge_value(lastSelected.nodrName,*i);
+n.through=lastSelected,nodrName;
+if(!p.contains(n))  // add the candidates to priority queue if does not exists
+p.insert(n);
+else
+if(p.isBetter(n))    //update candidate minDist in priority queue if a better path was found
+p.chgPriority(n);
+}
+
+lastSelected=p.top();
+p.minPriority();
+minPaths.push_back(last Selected);    //add  the candidates with the min distance to min paths list
+
+candidates.remove(lastSelected.nodeNames);   //remove it from candidates list
+ }
+lastSelected=minPaths.back();
+desiredpath.push-front(lastSelected.nodeName);
+
+while(lastSelected.nodeName!=u)
+{
+
+for(list<char>::iterator i=candidates.begin(); i!=candidates.end();++i)
+
+{
+n.nodeNam*i;
+n.minDist=lastSelected.minDist+graph.get_edge_value(lastSelected.nodeName,*i);
+n.through=lastSelected.nodeName;
+if(!p.contains(n))      //add the candidates to priority queue if does not exists
+p.insert(n);
+else
+if(p.Better(n))        // update candidates minDist in priority queue if a better path was found
+p.chgPriority(n);
+
+}
+
+lastSelected=p.top();   //select the candidates with mindist from the priority queue
+
+p.minPriority();         //remove it from the priority queue
+
+minPath.push_back(lastSelected);      //add the candidates  with min distance to minpath list
+
+candidates.remove(lastSelected.nodeName);   //remove it from candidates list
+
+}
+
+lastSelected=minPaths.back();
+desiredPath.push_front(lastSelected.nodeName);
+
+while(lastSelected.nodeName!=u)
+{
+
+for(list<NodeInfo>::iterator i=minPath.begin();!=minPaths.end();++i)
+
+if((*i).nodeName==lastSelected.through)
+{
+
+lastSelected=(*i)
+
+desiredPath.Push_front(lastSelected.nodeName);
+
+}
+}
+return desiredPath;   
+}
+int ShortestPath::path_size(char u,char  w)
+{
+int pathCost=0;
+list<char>sp;
+char current,next;
+ //calculate the shortest path from u to w and then sum up edge weights in this path
+sp=path(u,w);
+current=sp.front();
+sp.pop_front();
+for(list<char>::iterator  i=sp.begin(); i!=sp.end();++i)
+{
+next=(*i);
+pathcost+=graph.get_edge_value(current,next);
+current=next;
+}
+
+return pathCost;
+}
+
+//===================================================
+//Monte Carlo Class
+//used to generate random graphs and run simulation
+//====================================================
+
+class MonteVarlo
+{
+public:
+MonteCarlo();
+Graph random Graph(int vert,double density,int minDistEdge,int maxDistEdge);
+
+void run(Graph g);
+
+private:
+};
+
+//constructor of MonteCarlo class
+//intialize the seed of random number generator
+
+MonteCarlo::MonteCarlo()
+{
+srand(time(NUll));
+}
+
+
+// return a random Graph generated with number of nodes ,density and edge weight range information
+
+Graph MonteCarlo::randomGraph(int numVert,double density,intminDistEdge,int maxDistEdge)
+{
+int randDistEdge;
+char scrVert,dstVert;
+
+Graph g(numVert);
+
+for(inti=0;i<g.V();++i)
+fo(int j=i+1; j<g.V();++j)
+{
+double p=((static_cast<double>(rand())) / RAND-MAX;  // generate rando probability 
+if(p<density)       // if random probability is less than density,edge (i,j) will be set 
+{
+randDistEdge=rand()%(maxDistEdge-minDistEdge)+minDistEdge;   //Generate random edge weight
+scrvert=VertIntChar(i);
+dstVert=VertIntToChar(j);
+
+g.set_edge_value(srcVert,dst vert,randDistEdge);
+}
+ }
+
+return g;
+}
+
+//run a simulation findind the shortest paths in a given graph 
+void MonteCarlo::run(Graph g)
+{
+static int turn =0;
+cout<<endl<<"====RUNNING SIMULATION No."<<"==="<<endl;
+
+double d= static_Cast<double>(g.E()/((static_cast<double>(g.V())*static_cast<double>(g.V())-1)/2)*100;   // calucate real density reached
+
+cout<<"Vertices:"<<g.V()<<endl;
+cout<<"Edges:"<<g.E()<<"density:<<d<<"%)"<<endl;
+cout<<"Graph:"<<endl;
+g.show();
+
+//print out shortest information 
+
+list<char>v=g.vertices();
+cout<<endl<<"Vertices:"<<v<,endl;
+int reachVert=0,sumPathSize=0,avgPath sp(g);
+ShortestPath sp(g);
+
+for(list<char>::iterator i=++v.begin(); i!=++v.end();++i)
+{
+char src=v.front();
+char dst=(*i);
+list<char>p=sp.path(scr,dst);
+int ps=sp.path_size(scr,dst);
+cout<<"ShortestPath"("<<src<<"to"<<dst<,"):"<<ps<<:-><<p<<endl;
+else
+cout<<"ShortestPath"("<<src<<"to"<<dst<,"):"<<"UNREACHABLE**"<<endl;
+
+if(ps!=INFINIT)
+{
+ 
+reachVert++;     //sum up reached nodes 
+sumPathSize+=ps;  // sum up shortest paths found
+}
+}
+
+//calculate average shortest path and print it out 
+if(reachVert!=0)
+avgPathSize=sumPathSize/reachVert
+else
+avgPathSize=0;
+cout<<endl<<"AVG ShortestPath Size(reachVert:"<<reachVert<<"-sumPathSize<<"):"<<avgPathSize<<endl;
+}
+
+//===================================================================================================
+//Main function
+//======================================================================================================
+int main()
+{
+MonteCarlo simulation;
+Graph g;
+// creates a graph with 50 node /density 20% andthen run simulation
+
+g=simulation.randomGraph (50,0.2,1,10);
+simulation.run(g);
+// creates a graph with 50 node /density 40% andthen run simulation
+
+g=simulation.randomGraph (50,0.4,1,10);
+simulation.run(g);
+
+return 0;        
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
